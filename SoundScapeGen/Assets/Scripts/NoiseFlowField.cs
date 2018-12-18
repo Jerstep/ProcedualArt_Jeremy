@@ -16,6 +16,7 @@ public class NoiseFlowField : MonoBehaviour {
     public int amountParticles;
     [HideInInspector]
     public List<FlowfieldParticle> particles;
+    public List<MeshRenderer> particleMeshRenderer;
     public float particleScale;
     public float spawnRadius, particleMoveSpeed, particleRotateSpeed;
 
@@ -43,10 +44,11 @@ public class NoiseFlowField : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         _flowfieldDirection = new Vector3[_gridSize.x, _gridSize.y, _gridSize.z];
         _fastNoise = new FastNoise();
         particles = new List<FlowfieldParticle>();
+        particleMeshRenderer = new List<MeshRenderer>();
         for(int i = 0; i < amountParticles; i++)
         {
             int attempt = 0;
@@ -68,6 +70,7 @@ public class NoiseFlowField : MonoBehaviour {
                     particleInstance.transform.parent = this.transform;
                     particleInstance.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
                     particles.Add(particleInstance.GetComponent<FlowfieldParticle>());
+                    particleMeshRenderer.Add(particleInstance.GetComponent<MeshRenderer>());
                     break;
                 }
                 if(!isValid)
@@ -144,7 +147,7 @@ public class NoiseFlowField : MonoBehaviour {
 
             p.ApplyRotation(_flowfieldDirection[particlePos.x, particlePos.y, particlePos.z], particleRotateSpeed);
             p.moveSpeed = particleMoveSpeed;
-            p.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
+            //p.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
         }
     }
 

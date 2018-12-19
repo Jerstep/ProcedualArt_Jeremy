@@ -256,13 +256,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.14111607, y: 0.6233636, z: -0.11569401, w: 0.76034135}
-  m_LocalPosition: {x: -82.8, y: 99.1, z: 63.5}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -82.8, y: 58.2, z: 91.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 21.028002, y: 78.693, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,7 +1024,7 @@ Prefab:
         type: 2}
       propertyPath: _audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 436c34e7b28703d438dffa5646e20182, type: 3}
+      objectReference: {fileID: 8300000, guid: cfdf641487b70d049817ad075608f496, type: 3}
     - target: {fileID: 82653782310883768, guid: 841bb5553c4fbe34b8b650c441214617,
         type: 2}
       propertyPath: m_Volume
@@ -1106,14 +1106,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6b7c4dbe862834d9eb59182dc27e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridSize: {x: 20, y: 15, z: 30}
+  _gridSize: {x: 20, y: 20, z: 30}
   _cellSize: 6
   _increment: 6.38
   _offset: {x: 0, y: 0, z: 0}
   _offsetSpeed: {x: -3, y: 2, z: 1}
   particlePrefab: {fileID: 1475013365217438, guid: b18bc949422f98648b28976bc9b145bb,
     type: 2}
-  amountParticles: 500
+  amountParticles: 3000
   particles: []
   particleMeshRenderer: []
   particleScale: 1
@@ -1146,31 +1146,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioPeer: {fileID: 223464290}
   useSpeed: 1
-  moveSpeedMinMax: {x: 0, y: 80}
+  moveSpeedMinMax: {x: 0, y: 50}
   rotateSpeedMinMax: {x: 0, y: 200}
   useScale: 1
-  scaleMinMax: {x: 0, y: 3}
+  scaleMinMax: {x: 0, y: 30}
   material: {fileID: 2100000, guid: ef12c2d18d60fb440a542d8dc98109d6, type: 2}
   useColor1: 1
-  colorName1: Color
+  colorName1: _Color
   gradient1:
     serializedVersion: 2
     key0: {r: 0.25894284, g: 1, b: 0, a: 1}
-    key1: {r: 0.34405518, g: 0, b: 1, a: 1}
-    key2: {r: 0.0397346, g: 0.0141509175, b: 1, a: 0}
-    key3: {r: 0.3788637, g: 0.05306624, b: 1, a: 0}
+    key1: {r: 0.9813104, g: 1, b: 0.015686274, a: 1}
+    key2: {r: 1, g: 0.5233684, b: 0.04705882, a: 0}
+    key3: {r: 1, g: 0.054901958, b: 0.1147313, a: 0}
     key4: {r: 1, g: 0, b: 0.956861, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0.34405518, g: 0, b: 1, a: 0}
+    key6: {r: 0.2216981, g: 0.69949204, b: 1, a: 0}
+    key7: {r: 0.023529395, g: 0.9764706, b: 0.66132826, a: 0}
     ctime0: 0
-    ctime1: 17155
-    ctime2: 34117
-    ctime3: 51657
-    ctime4: 65535
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
+    ctime1: 9445
+    ctime2: 17926
+    ctime3: 26985
+    ctime4: 36237
+    ctime5: 45875
+    ctime6: 55512
+    ctime7: 65535
     atime0: 0
     atime1: 65535
     atime2: 0
@@ -1180,30 +1180,30 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 5
+    m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   colorThreshold1: 0
-  colorMultyplier1: 5
+  colorMultyplier1: 10.96
   useColor2: 1
-  colorName2: EmissionColor
+  colorName2: _EmissionColor
   gradient2:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.3254717, g: 0.57186383, b: 1, a: 1}
-    key2: {r: 1, g: 0.6875157, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.25894284, g: 1, b: 0, a: 1}
+    key1: {r: 0.34405518, g: 0, b: 1, a: 1}
+    key2: {r: 0.9813104, g: 1, b: 0.015686274, a: 0}
+    key3: {r: 0.2216981, g: 0.69949204, b: 1, a: 0}
+    key4: {r: 1, g: 0.5233684, b: 0.04705882, a: 0}
+    key5: {r: 1, g: 0.054901958, b: 0.1147313, a: 0}
+    key6: {r: 0.023529395, g: 0.9764706, b: 0.66132826, a: 0}
+    key7: {r: 1, g: 0, b: 0.956861, a: 0}
     ctime0: 0
-    ctime1: 33346
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
+    ctime1: 8867
+    ctime2: 17733
+    ctime3: 26214
+    ctime4: 35852
+    ctime5: 45682
+    ctime6: 55512
+    ctime7: 65535
     atime0: 0
     atime1: 65535
     atime2: 0
@@ -1213,7 +1213,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 3
+    m_NumColorKeys: 8
     m_NumAlphaKeys: 2
-  colorThreshold2: 0.496
-  colorMultyplier2: 9
+  colorThreshold2: 0.5
+  colorMultyplier2: 3

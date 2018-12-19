@@ -39,6 +39,7 @@ public class AudioFlowField : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        audioPeer = GameObject.FindObjectOfType<AudioPeer>();
         noiseFlowField = GetComponent<NoiseFlowField>();
 
         audioMaterial = new Material[8];
@@ -96,7 +97,7 @@ public class AudioFlowField : MonoBehaviour {
             {
                 if(audioPeer._audioBand[i] > colorThreshold2)
                 {
-                    audioMaterial[i].SetColor(colorName2, color1[i] * audioPeer._audioBand[i] * colorMultyplier2);
+                    audioMaterial[i].SetColor(colorName2, color2[i] * audioPeer._audioBand[i] * colorMultyplier2);
                 }
                 else
                 {

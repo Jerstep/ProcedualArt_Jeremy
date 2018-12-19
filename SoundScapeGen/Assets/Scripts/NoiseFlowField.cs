@@ -49,6 +49,7 @@ public class NoiseFlowField : MonoBehaviour {
         _fastNoise = new FastNoise();
         particles = new List<FlowfieldParticle>();
         particleMeshRenderer = new List<MeshRenderer>();
+
         for(int i = 0; i < amountParticles; i++)
         {
             int attempt = 0;

@@ -19,7 +19,7 @@ public class AudioFlowField : MonoBehaviour {
 
     [Header("Material")]
     public Material material;
-    private Material[] audioMaterial;
+    public Material[] audioMaterial;
 
     public bool useColor1;
     public string colorName1;
@@ -36,6 +36,8 @@ public class AudioFlowField : MonoBehaviour {
     [Range(0f, 1f)]
     public float colorThreshold2;
     public float colorMultyplier2;
+
+    public int band;
 
     // Use this for initialization
     void Start () {
@@ -56,9 +58,10 @@ public class AudioFlowField : MonoBehaviour {
         int countBand = 0;
         for (int i = 0; i < noiseFlowField.amountParticles; i++)
         {
-            int band = countBand % 8;
+            band = countBand % 8;
             noiseFlowField.particleMeshRenderer[i].material = audioMaterial[band];
             noiseFlowField.particles[i].audioband = band;
+
             countBand++;
         }
 	}
@@ -79,6 +82,13 @@ public class AudioFlowField : MonoBehaviour {
                 noiseFlowField.particles[i].transform.localScale = new Vector3(scale, scale, scale);
             }
         }
+
+        for(int i = 0; i < noiseFlowField.staticParticles.Count; i++)
+        {
+            float scale = Mathf.Lerp(scaleMinMax.x, scaleMinMax.y, audioPeer._audioBandBuffer[noiseFlowField.staticParticles[i].audioband]);
+            noiseFlowField.staticParticles[i].transform.localScale = new Vector3(scale, scale, scale);
+        }
+
         for(int i = 0; i < 8; i++)
         {
             if(useColor1)

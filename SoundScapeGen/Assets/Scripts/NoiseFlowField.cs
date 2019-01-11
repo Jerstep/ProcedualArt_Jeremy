@@ -13,13 +13,29 @@ public class NoiseFlowField : MonoBehaviour {
 
     //Particles
     public GameObject particlePrefab;
+    public GameObject particleStaticPrefab;
+    public GameObject particleBloomPrefab;
+
     public int amountParticles;
-    [HideInInspector]
+    public int maxStatic;
+    //[HideInInspector]
+    public List<Transform> particleLocations; 
     public List<FlowfieldParticle> particles;
     public List<MeshRenderer> particleMeshRenderer;
+
+    public List<FlowfieldParticleStatic> staticParticles;
+    public List<MeshRenderer> staticParticleMeshRenderer;
+
+    public List<FlowfieldParticleBloom> bloomParticles;
+    public List<MeshRenderer> bloomParticleMeshRenderer;
+
+
     public float particleScale;
     public float spawnRadius, particleMoveSpeed, particleRotateSpeed;
+    private float counter = 0f;
+    public float waitTime;
 
+    public int countBand = 0;
 
 
     bool particleSpawnValidation(Vector3 position)
@@ -33,6 +49,7 @@ public class NoiseFlowField : MonoBehaviour {
                 break;
             }
         }
+
         if(valid)
         {
             return true;
@@ -58,7 +75,7 @@ public class NoiseFlowField : MonoBehaviour {
             {
                 Vector3 randomPos = new Vector3(
                     Random.Range(this.transform.position.x, this.transform.position.x + _gridSize.x * _cellSize),
-                        Random.Range(this.transform.position.y, this.transform.position.y + _gridSize.y * _cellSize),
+                        /*Random.Range(this.transform.position.y, this.transform.position.y + _gridSize.y * _cellSize)*/0,
                             Random.Range(this.transform.position.z, this.transform.position.z + _gridSize.z * _cellSize)
                             );
 
@@ -68,10 +85,12 @@ public class NoiseFlowField : MonoBehaviour {
                 {
                     GameObject particleInstance = (GameObject)Instantiate(particlePrefab);
                     particleInstance.transform.position = randomPos;
+                    particleInstance.transform.eulerAngles = new Vector3(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360));
                     particleInstance.transform.parent = this.transform;
                     particleInstance.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
                     particles.Add(particleInstance.GetComponent<FlowfieldParticle>());
                     particleMeshRenderer.Add(particleInstance.GetComponent<MeshRenderer>());
+                    particleLocations.Add(particleInstance.GetComponent<Transform>());
                     break;
                 }
                 if(!isValid)
@@ -87,7 +106,53 @@ public class NoiseFlowField : MonoBehaviour {
 	void Update () {
         CalculateFlowfieldDirections();
         ParticleBehaviour();
+        if(staticParticles.Count < maxStatic)
+        {
+            SpawnStaticParticle();
+        }
     }
+
+    void SpawnStaticParticle()
+    {
+        int randomStart = Random.Range(0, 500);
+
+        //if(randomStart == 3)
+        //{
+        //    SpawnBloomParticle();
+        //}
+
+        if(counter < waitTime)
+        {
+            counter += Time.deltaTime;
+        }
+        else
+        {
+            for(int i = 0; i < amountParticles; i++)
+            {                
+                GameObject particleStaticInstance = (GameObject)Instantiate(particleStaticPrefab);
+                particleStaticInstance.transform.position = particleLocations[i].position;
+                particleStaticInstance.transform.parent = this.transform;
+                particleStaticInstance.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
+                staticParticles.Add(particleStaticInstance.GetComponent<FlowfieldParticleStatic>());
+                staticParticleMeshRenderer.Add(particleStaticInstance.GetComponent<MeshRenderer>());
+            }
+
+            counter = 0;
+        }
+    }
+
+    //void SpawnBloomParticle()
+    //{
+    //    for(int i = 0; i < amountParticles; i++)
+    //    {
+    //        GameObject particleBloomInstance = (GameObject)Instantiate(particleBloomPrefab);
+    //        particleBloomInstance.transform.position = particleLocations[i].position;
+    //        particleBloomInstance.transform.parent = this.transform;
+    //        particleBloomInstance.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
+    //        bloomParticles.Add(particleBloomInstance.GetComponent<FlowfieldParticleBloom>());
+    //        bloomParticleMeshRenderer.Add(particleBloomInstance.GetComponent<MeshRenderer>());
+    //    }
+    //}
 
     void CalculateFlowfieldDirections()
     {
@@ -148,7 +213,6 @@ public class NoiseFlowField : MonoBehaviour {
 
             p.ApplyRotation(_flowfieldDirection[particlePos.x, particlePos.y, particlePos.z], particleRotateSpeed);
             p.moveSpeed = particleMoveSpeed;
-            //p.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
         }
     }
 

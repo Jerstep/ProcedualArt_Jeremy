@@ -113,6 +113,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &144931858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 144931860}
+  - component: {fileID: 144931859}
+  m_Layer: 0
+  m_Name: CameraCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &144931859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 144931858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8f05d3095d19c47980d1df33a15b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeedMinMax: {x: 0, y: 20}
+  audioPeer: {fileID: 223464290}
+  up: 1
+  right: 0
+  left: 0
+  back: 0
+--- !u!4 &144931860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 144931858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 150, y: 150, z: 150}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 534669905}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &223464290 stripped
 MonoBehaviour:
@@ -196,6 +243,7 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
+  - component: {fileID: 534669907}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: Untagged
@@ -257,10 +305,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -82.8, y: 58.2, z: 91.9}
+  m_LocalPosition: {x: -189.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 144931860}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &534669906
@@ -322,6 +370,23 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &534669907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8f05d3095d19c47980d1df33a15b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeedMinMax: {x: 0, y: 10}
+  audioPeer: {fileID: 223464290}
+  up: 0
+  right: 0
+  left: 0
+  back: 1
 --- !u!1 &561147506
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +413,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cfdf641487b70d049817ad075608f496, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d56d3925227c7cd4685048999d57c4d7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.05
   m_Pitch: 1
@@ -969,7 +1034,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &668197046
 Prefab:
@@ -1008,7 +1073,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4681757850639214, guid: 841bb5553c4fbe34b8b650c441214617, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 82653782310883768, guid: 841bb5553c4fbe34b8b650c441214617,
         type: 2}
@@ -1024,11 +1089,11 @@ Prefab:
         type: 2}
       propertyPath: _audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: cfdf641487b70d049817ad075608f496, type: 3}
+      objectReference: {fileID: 8300000, guid: 4905c111059a0ad42aadcf0ad7b71d6c, type: 3}
     - target: {fileID: 82653782310883768, guid: 841bb5553c4fbe34b8b650c441214617,
         type: 2}
       propertyPath: m_Volume
-      value: 0.152
+      value: 0.869
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 841bb5553c4fbe34b8b650c441214617, type: 2}
@@ -1076,7 +1141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1452294358
 GameObject:
@@ -1106,32 +1171,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6b7c4dbe862834d9eb59182dc27e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridSize: {x: 20, y: 20, z: 30}
-  _cellSize: 6
-  _increment: 6.38
-  _offset: {x: 0, y: 0, z: 0}
-  _offsetSpeed: {x: -3, y: 2, z: 1}
+  _gridSize: {x: 30, y: 30, z: 30}
+  _cellSize: 10
+  _increment: 16
+  _offset: {x: -267.2696, y: 534.5392, z: 356.35956}
+  _offsetSpeed: {x: -6, y: 6, z: 8}
   particlePrefab: {fileID: 1475013365217438, guid: b18bc949422f98648b28976bc9b145bb,
     type: 2}
-  amountParticles: 3000
+  particleStaticPrefab: {fileID: 1475013365217438, guid: b202314cfa1c4d247aa02bfed0df2b08,
+    type: 2}
+  particleBloomPrefab: {fileID: 0}
+  amountParticles: 8
+  maxStatic: 5000
+  particleLocations: []
   particles: []
   particleMeshRenderer: []
+  staticParticles: []
+  staticParticleMeshRenderer: []
+  bloomParticles: []
+  bloomParticleMeshRenderer: []
   particleScale: 1
-  spawnRadius: 1
+  spawnRadius: 50
   particleMoveSpeed: 20
   particleRotateSpeed: 200
+  waitTime: 0.08
+  countBand: 0
 --- !u!4 &1452294360
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452294358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1452294361
 MonoBehaviour:
@@ -1147,10 +1223,11 @@ MonoBehaviour:
   audioPeer: {fileID: 223464290}
   useSpeed: 1
   moveSpeedMinMax: {x: 0, y: 50}
-  rotateSpeedMinMax: {x: 0, y: 200}
+  rotateSpeedMinMax: {x: -20, y: 200}
   useScale: 1
-  scaleMinMax: {x: 0, y: 30}
+  scaleMinMax: {x: 0, y: 5}
   material: {fileID: 2100000, guid: ef12c2d18d60fb440a542d8dc98109d6, type: 2}
+  audioMaterial: []
   useColor1: 1
   colorName1: _Color
   gradient1:
@@ -1217,3 +1294,4 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   colorThreshold2: 0.5
   colorMultyplier2: 3
+  band: 0

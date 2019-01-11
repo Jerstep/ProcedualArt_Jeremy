@@ -13,7 +13,6 @@ public class FlowfieldParticle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         this.transform.position += transform.forward * moveSpeed * Time.deltaTime;
-
 	}
 
     public void ApplyRotation(Vector3 rotation, float rotationSpeed)

@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioband: 0
   audioPeer: {fileID: 0}
+  counter: 0
   rotateSpeedMinMax: {x: -50, y: 50}
-  waitTime: 1
   rotateSpeed: 50
+  disapperaTime: 15
+  removeAfterTime: 1

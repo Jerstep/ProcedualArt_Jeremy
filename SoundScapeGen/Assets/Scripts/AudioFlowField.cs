@@ -56,7 +56,7 @@ public class AudioFlowField : MonoBehaviour {
         }
 
         int countBand = 0;
-        for (int i = 0; i < noiseFlowField.amountParticles; i++)
+        for (int i = 0; i < noiseFlowField.particles.Count; i++)
         {
             band = countBand % 8;
             noiseFlowField.particleMeshRenderer[i].material = audioMaterial[band];
@@ -74,7 +74,7 @@ public class AudioFlowField : MonoBehaviour {
             noiseFlowField.particleRotateSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, audioPeer._AmplitudeBuffer);
         }
 
-        for(int i = 0; i < noiseFlowField.amountParticles; i++)
+        for(int i = 0; i < noiseFlowField.particles.Count; i++)
         {
             if(useScale)
             {

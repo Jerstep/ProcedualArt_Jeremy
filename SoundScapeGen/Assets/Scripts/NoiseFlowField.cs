@@ -12,12 +12,20 @@ public class NoiseFlowField : MonoBehaviour {
     public Vector3[,,] _flowfieldDirection;
 
     //Particles
+    [Header("Particle Prefabs")]
     public GameObject particlePrefab;
     public GameObject particleStaticPrefab;
-    public GameObject particleBloomPrefab;
 
+    [Header("Particle Bounderies (amount)")]
     public int amountParticles;
     public int maxStatic;
+
+    [Header("Particle Branch")]
+    public int amountBranchesPerParticle;
+    public float particleMoveTime;
+    private float branchCounter = 0f;
+
+
     //[HideInInspector]
     public List<Transform> particleLocations; 
     public List<FlowfieldParticle> particles;
@@ -26,9 +34,6 @@ public class NoiseFlowField : MonoBehaviour {
     public List<FlowfieldParticleStatic> staticParticles;
     public List<MeshRenderer> staticParticleMeshRenderer;
 
-    public List<FlowfieldParticleBloom> bloomParticles;
-    public List<MeshRenderer> bloomParticleMeshRenderer;
-
 
     public float particleScale;
     public float spawnRadius, particleMoveSpeed, particleRotateSpeed;
@@ -36,6 +41,8 @@ public class NoiseFlowField : MonoBehaviour {
     public float waitTime;
 
     public int countBand = 0;
+
+    private int particleCount;
 
 
     bool particleSpawnValidation(Vector3 position)
@@ -60,8 +67,13 @@ public class NoiseFlowField : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Awake () {
+    private void Awake()
+    {
+        StartFlowField();
+    }
+
+    // Use this for initialization
+    void StartFlowField () {
         _flowfieldDirection = new Vector3[_gridSize.x, _gridSize.y, _gridSize.z];
         _fastNoise = new FastNoise();
         particles = new List<FlowfieldParticle>();
@@ -102,32 +114,46 @@ public class NoiseFlowField : MonoBehaviour {
         Debug.Log(particles.Count);
 	}
 	
+    public void updateParticleList()
+    {
+        particles = new List<FlowfieldParticle>();
+        particleMeshRenderer = new List<MeshRenderer>();
+        Debug.Log(particles.Count);
+    }
+
 	// Update is called once per frame
 	void Update () {
-        CalculateFlowfieldDirections();
-        ParticleBehaviour();
         if(staticParticles.Count < maxStatic)
         {
             SpawnStaticParticle();
+            if(particles.Count < 64)
+            {
+                if(branchCounter < particleMoveTime)
+                {
+                    branchCounter += Time.deltaTime;
+                }
+                else
+                {
+                    SpawnBranchParticle();
+                    branchCounter = 0;
+                }
+            }
+
         }
+
+        CalculateFlowfieldDirections();
+        ParticleBehaviour();
     }
 
     void SpawnStaticParticle()
     {
-        int randomStart = Random.Range(0, 500);
-
-        //if(randomStart == 3)
-        //{
-        //    SpawnBloomParticle();
-        //}
-
         if(counter < waitTime)
         {
             counter += Time.deltaTime;
         }
         else
         {
-            for(int i = 0; i < amountParticles; i++)
+            for(int i = 0; i < particles.Count; i++)
             {                
                 GameObject particleStaticInstance = (GameObject)Instantiate(particleStaticPrefab);
                 particleStaticInstance.transform.position = particleLocations[i].position;
@@ -141,18 +167,31 @@ public class NoiseFlowField : MonoBehaviour {
         }
     }
 
-    //void SpawnBloomParticle()
-    //{
-    //    for(int i = 0; i < amountParticles; i++)
-    //    {
-    //        GameObject particleBloomInstance = (GameObject)Instantiate(particleBloomPrefab);
-    //        particleBloomInstance.transform.position = particleLocations[i].position;
-    //        particleBloomInstance.transform.parent = this.transform;
-    //        particleBloomInstance.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
-    //        bloomParticles.Add(particleBloomInstance.GetComponent<FlowfieldParticleBloom>());
-    //        bloomParticleMeshRenderer.Add(particleBloomInstance.GetComponent<MeshRenderer>());
-    //    }
-    //}
+    private void SpawnBranchParticle()
+    {
+        int amountParticles = particles.Count;
+        Debug.Log("Amount: " + amountParticles);
+
+        for(int i = 0; i < amountParticles; i++)
+        {
+            Debug.Log("Ins");
+            //particles[i].transform.eulerAngles = new Vector3(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360));
+
+            for(int e = 0; e < amountBranchesPerParticle; e++)
+            {
+                Debug.Log("Ins");
+                GameObject particleInstance = (GameObject)Instantiate(particlePrefab);
+                particleInstance.transform.position = particles[i].transform.position;
+                particleInstance.transform.eulerAngles = new Vector3(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360));
+                particleInstance.transform.parent = this.transform;
+                particleInstance.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
+
+                particles.Add(particleInstance.GetComponent<FlowfieldParticle>());
+                particleMeshRenderer.Add(particleInstance.GetComponent<MeshRenderer>());
+                particleLocations.Add(particleInstance.GetComponent<Transform>());
+            }
+        }
+    }
 
     void CalculateFlowfieldDirections()
     {

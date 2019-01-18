@@ -10,13 +10,13 @@ public class FlowfieldParticleStatic : MonoBehaviour {
     private AudioFlowField AFF;
     public AudioPeer audioPeer;
     private int band;
+    [SerializeField] private float counter = 0;
 
     public Vector2 rotateSpeedMinMax;
 
-    private float counter = 0;
-    public float waitTime;
-
     public float rotateSpeed;
+    public int disapperaTime;
+    public bool removeAfterTime;
 
     // Use this for initialization
     private void Awake()
@@ -38,5 +38,18 @@ public class FlowfieldParticleStatic : MonoBehaviour {
         rotateSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, audioPeer._AmplitudeBuffer);
         this.transform.Rotate(Vector3.up * (Time.deltaTime * rotateSpeed));
         this.transform.Rotate(Vector3.back * (Time.deltaTime * rotateSpeed));
+        
+        if(removeAfterTime)
+        {
+            counter += Time.deltaTime;
+
+            if(counter > disapperaTime)
+            {
+                NFF.staticParticles.Remove(this.gameObject.GetComponent<FlowfieldParticleStatic>());
+                NFF.staticParticleMeshRenderer.Remove(this.gameObject.GetComponent<MeshRenderer>());
+                gameObject.SetActive(false);
+                Destroy(gameObject);
+            }
+        }
     }
 }

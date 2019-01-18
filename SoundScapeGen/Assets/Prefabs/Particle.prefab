@@ -95,5 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703debec931cd1d49b3b8dce71460457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
   audioband: 0
+  moveSpeed: 0
+  moveTime: 2
+  instantiateAmount: 2
+  flowFieldParticle: {fileID: 1475013365217438}
+  audioPeer: {fileID: 0}
